@@ -27,8 +27,8 @@ Requires: **Python 3.7** or above<br>
 Run Source code: ```python main.py```<br>
 Convert to executable (.exe):
 1. ```pyinstaller --distpath [EXPORT DIRECTORY] --hidden-import tkinter --exclude-module PySide2 --exclude-module PyQt5 -w main.py```
-2. Copy pulp folder ("[PYTHON PATH]\Lib\site-packages\pulp") inside *[EXPORT DIRECTORY]/dist/main* folder
-3. Run *[EXPORT DIRECTORY]/dist/main/main.exe*
+2. Copy pulp folder *"[PYTHON PATH]\Lib\site-packages\pulp"* inside *"[EXPORT DIRECTORY]/dist/main"* folder
+3. Run *"[EXPORT DIRECTORY]/dist/main/main.exe"*
 
 ## Additional Info
 Project Start: 23.10.2020 <sub>(DD.MM.YYYY)</sub><br>
