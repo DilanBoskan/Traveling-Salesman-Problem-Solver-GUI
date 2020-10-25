@@ -99,16 +99,17 @@ class MainWindow(tk.Tk):
         self.lines = []
         self.annotations = []
         self.distanceMode_var = tk.StringVar(value=self.distanceModes[0])
+        self.transparent_var = tk.BooleanVar(value=False)
         # Images
         self.maximize_img = open_image('img/maximize.png',
-                                       size=(15, 15))
+                                       size=(16, 16))
         self.minimize_img = open_image('img/minimize.png',
-                                       size=(15, 15))
+                                       size=(16, 16))
 
         # --Widgets--
         self.create_widgets()
         self.configure_widgets()
-        self.place_minimize()
+        self.place_widgets()
 
         # -Other-
         self.update_total_distance()
@@ -132,11 +133,31 @@ class MainWindow(tk.Tk):
         self.plot_Frame = tk.Frame(self)
         self.plot_wig = FigureCanvasTkAgg(figure, self.plot_Frame).get_tk_widget()  # nopep8
         self.fill_plot_Frame()
+        self.transparent_Checkbutton = ttk.Checkbutton(self,
+                                                       text='Transparent',
+                                                       variable=self.transparent_var)
+        self.export_Button = ttk.Button(self,
+                                        text='Export Image',
+                                        command=self.export_plot)
         self.resize_Button = ttk.Button(self,
                                         command=self.switch_fullscreen)
 
     def configure_widgets(self):
         """Change widget styling and appearance"""
+        ttk.Style().configure('TCheckbutton',
+                              background='#FFF')
+
+    def place_widgets(self):
+        """
+        Place main widgets
+        """
+        self.place_minimize()
+        self.transparent_Checkbutton.place(x=-90 - 31 - 5 - 90, y=-31, width=90, height=26,
+                                           relx=1, rely=1, relwidth=0, relheight=0)
+        self.export_Button.place(x=-90 - 31 - 5, y=-31, width=90, height=26,
+                                 relx=1, rely=1, relwidth=0, relheight=0)
+        self.resize_Button.place(x=-31, y=-31, width=26, height=26,
+                                 relx=1, rely=1, relwidth=0, relheight=0)
 
     def place_minimize(self):
         """Minimize Window"""
@@ -151,6 +172,7 @@ class MainWindow(tk.Tk):
             ypad=int(self.winfo_screenheight()/2 - 30 -
                      window_height/2)))
         self.resizable(False, False)
+
         # -Update Widgets Position-
         self.top_Frame.place(x=0, y=0, width=0, height=80,
                              relx=0, rely=0, relwidth=1, relheight=0)
@@ -164,14 +186,12 @@ class MainWindow(tk.Tk):
                               relx=1, rely=0, relwidth=0, relheight=0)
         self.plot_wig.place(x=0, y=0, width=0, height=0,
                             relx=0, rely=0, relwidth=1, relheight=1)
-        self.resize_Button.place(x=-30, y=-30, width=25, height=25,
-                                 relx=1, rely=1, relwidth=0, relheight=0)
         self.resize_Button.configure(image=self.maximize_img)
 
     def place_maximize(self):
         """Maximize Window"""
         # -Update Geometry-
-        window_height = self.winfo_screenheight() - 70
+        window_height = self.winfo_screenheight() - 73
         window_width = window_height
         # Set Geometry and Center Window
         self.geometry('{width}x{height}+{xpad}+{ypad}'.format(
@@ -179,9 +199,10 @@ class MainWindow(tk.Tk):
             height=int(window_height),
             xpad=int(self.winfo_screenwidth()/2 -
                      window_width/2),
-            ypad=int(self.winfo_screenheight()/2 - 35 -
+            ypad=int(self.winfo_screenheight()/2 - 37 -
                      window_height/2)))
         self.resizable(True, True)
+
         # -Update Widgets Position-
         self.top_Frame.place_forget()
         self.leftLabel_Frame.place_forget()
@@ -201,6 +222,8 @@ class MainWindow(tk.Tk):
         else:
             self.place_maximize()
             self.fullscreen = True
+
+        self.update_total_distance()
 
     def refill_grid_Frame(self):
         """
@@ -381,7 +404,12 @@ class MainWindow(tk.Tk):
         """
         Update the title of the plot
         """
-        axis.set_title(f'{total_distance} {self.distanceMode_var.get().lower()}')  # nopep8
+        if self.fullscreen:
+            fs = 18
+        else:
+            fs = 12
+        axis.set_title(f'{total_distance} {self.distanceMode_var.get().lower()}',
+                       fontsize=fs)
         # Update canvas
         figure.canvas.draw()
         figure.canvas.flush_events()
@@ -441,6 +469,26 @@ class MainWindow(tk.Tk):
 
         self.calculate_Button.configure(state=tk.NORMAL)
         print(f'Time: {round(time.perf_counter() - stime, 2)}s')
+
+    def export_plot(self):
+        """
+        Export the graph as an image
+        """
+        if self.transparent_var.get():
+            defext = '.png'
+        else:
+            defext = '.jpg'
+
+        path = tk.filedialog.asksaveasfilename(parent=self,
+                                               title='Save Plot',
+                                               filetypes=[
+                                                   ('Image', '*.png *.jpg *.jpeg *.pdf *.pgf *.ps *.raw *.rgba *.svg *.sv *.tif *.tiff')],
+                                               initialfile='TSPSolution',
+                                               defaultextension=defext)
+        if path:
+            filetype = os.path.splitext(path)[1][1:]
+            figure.savefig(path, format=filetype, transparent=self.transparent_var.get())
+            Image.open(path).show()
 
 
 if __name__ == "__main__":
