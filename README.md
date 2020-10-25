@@ -22,6 +22,6 @@ Requires: **Python 3.7** or above<br>
 ```python main.py```
 
 ## Additional Info
-Project Start: 23.10.2020 <small>(DD.MM.YYYY)</small><br>
-Project End: 24.10.2020 <small>(DD.MM.YYYY)</small><br><br>
-Time spent: 05:15 <small>(HH:MM)</small>
+Project Start: 23.10.2020 <sub>(DD.MM.YYYY)</sub><br>
+Project End: 24.10.2020 <sub>(DD.MM.YYYY)</sub><br><br>
+Time spent: 05:15 <sub>(HH:MM)</sub>
