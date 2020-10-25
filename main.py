@@ -18,6 +18,7 @@ import time
 # System Modules
 import sys
 import os
+import subprocess
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 # Images
@@ -488,7 +489,7 @@ class MainWindow(tk.Tk):
         if path:
             filetype = os.path.splitext(path)[1][1:]
             figure.savefig(path, format=filetype, transparent=self.transparent_var.get())
-            Image.open(path).show()
+            subprocess.Popen(path, shell=True)
 
 
 if __name__ == "__main__":

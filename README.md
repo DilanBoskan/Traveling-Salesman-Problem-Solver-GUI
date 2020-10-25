@@ -1,14 +1,16 @@
 # Traveling Salesman Problem Solver GUI
 A desktop application written in python that lets the user select certain points on a 20x20 grid, which are then connected with the shortest possible route.
 <p align="center">
-    <img src="showcase.gif"/>
+    <img src="https://i.imgur.com/ZSV7Q2E.gif" alt="GUI Showcase"/>
 </p>
 
 ## Motivation
-Solve a common
+Personal interest to provide an aesthetically pleasing and efficient GUI to solve a mathematical, relatively difficult problem.
 
 ## Features
 * Solve the TSP
+* Save the solution as an image
+    * Supported file types:<br>png, jpg, jpeg, pdf, pgf, ps, raw, rgba, svg, sv, tif, tiff
 * Easy and intuitive to use grid for selecting points
 * Fullscreen the solution
 * Choose between multiple length representations
