@@ -1,7 +1,7 @@
 # Traveling Salesman Problem Solver GUI
 A desktop application written in python that lets the user select certain points on a 20x20 grid, which are then connected with the shortest possible route.
 <p align="center">
-    <img src="https://i.imgur.com/LILiUX0.mp4" alt="GUI Showcase"/>
+    <img src="https://i.imgur.com/opyRHOj.mp4" alt="GUI Showcase"/>
 </p>
 
 ## Features
