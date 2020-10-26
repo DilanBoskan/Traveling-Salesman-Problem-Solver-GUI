@@ -1,7 +1,7 @@
 # Traveling Salesman Problem Solver GUI
 A desktop application written in python that lets the user select certain points on a 20x20 grid, which are then connected with the shortest possible route.
 <p align="center">
-    <img src="showcase.gif" alt="GUI Showcase"/>
+    <img src="https://i.imgur.com/ZSV7Q2E.gif" alt="GUI Showcase"/>
 </p>
 
 ## Motivation
@@ -27,7 +27,7 @@ Requires: **Python 3.7** or above<br>
 Run Source code: ```python main.py```<br>
 Convert to executable (.exe):
 1. ```pyinstaller --distpath [EXPORT DIRECTORY] --hidden-import tkinter --exclude-module PySide2 --exclude-module PyQt5 -w main.py```
-2. Copy pulp folder *"[PYTHON PATH]\Lib\site-packages\pulp"* inside *"[EXPORT DIRECTORY]/dist/main"* folder
+2. Copy pulp folder *"[PYTHON PATH]/Lib/site-packages/pulp"* inside *"[EXPORT DIRECTORY]/dist/main"* folder
 3. Run *"[EXPORT DIRECTORY]/dist/main/main.exe"*
 
 ## Additional Info
