@@ -4,6 +4,8 @@ A desktop application written in python that lets the user select certain points
     <img src="showcase.gif" alt="GUI Showcase"/>
 </p>
 
+[![Downloads](https://img.shields.io/github/downloads/DilanBoskan/Traveling-Salesman-Problem-Solver-GUI/total.svg)](https://github.com/DilanBoskan/Traveling-Salesman-Problem-Solver-GUI/releases/latest)
+
 ## Motivation
 Personal interest to provide an aesthetically pleasing and efficient GUI to solve an algorithmic, relatively difficult problem.
 
